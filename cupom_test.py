@@ -217,13 +217,13 @@ def test_valida_estado():
 
 
 ENDERECO_CEP_NULO = cupom.Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO,
-                                   MUNICIPIO, ESTADO, CEP)
+                                   MUNICIPIO, ESTADO, None)
 
 LOJA_CEP_NULO = cupom.Loja(NOME_LOJA, ENDERECO_CEP_NULO, TELEFONE, OBSERVACAO,
                            CNPJ, INSCRICAO_ESTADUAL)
 
 ENDERECO_CEP_VAZIO = cupom.Endereco(LOGRADOURO, NUMERO, COMPLEMENTO, BAIRRO,
-                                   MUNICIPIO, ESTADO, CEP)
+                                   MUNICIPIO, ESTADO, "")
 
 LOJA_CEP_VAZIO = cupom.Loja(NOME_LOJA, ENDERECO_CEP_VAZIO, TELEFONE,
                             OBSERVACAO, CNPJ, INSCRICAO_ESTADUAL)
@@ -305,8 +305,10 @@ def test_valida_inscricao_estadual():
     verifica_campo_obrigatorio_objeto(
         "O campo inscrição estadual da loja é obrigatório", LOJA_IE_VAZIA)
 
+ENDERECO_SEM_NUMERO_SEM_COMPLEMENTO = cupom.Endereco(LOGRADOURO, 0, None, BAIRRO,
+                                   MUNICIPIO, ESTADO, CEP)
 
-LOJA_SEM_NUMERO_SEM_COMPLEMENTO = cupom.Loja(NOME_LOJA, ENDERECO_COMPLETO,
+LOJA_SEM_NUMERO_SEM_COMPLEMENTO = cupom.Loja(NOME_LOJA, ENDERECO_SEM_NUMERO_SEM_COMPLEMENTO,
                                              TELEFONE, OBSERVACAO, CNPJ,
                                              INSCRICAO_ESTADUAL)
 
@@ -323,8 +325,10 @@ def test_valida_numero_e_complemento():
     assert LOJA_SEM_NUMERO_SEM_COMPLEMENTO.dados_loja() == TEXTO_ESPERADO_SEM_NUMERO_SEM_COMPLEMENTO
 
 
+ENDERECO_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO = cupom.Endereco(LOGRADOURO, 0, None, None,
+                                   MUNICIPIO, ESTADO, CEP)
 LOJA_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO = cupom.Loja(NOME_LOJA, 
-                                                        ENDERECO_COMPLETO, 
+                                                        ENDERECO_SEM_NUMERO_SEM_COMPLEMENTO_SEM_BAIRRO, 
                                                         TELEFONE, OBSERVACAO,
                                                         CNPJ, 
                                                         INSCRICAO_ESTADUAL)
